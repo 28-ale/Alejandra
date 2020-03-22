@@ -105,19 +105,61 @@ public class Clientes {
           System.out.println(e);
       }
       return respuesta;
+  }  
+
+  public boolean Modificar(String Nombre, String Apellido,String Direccion,int Edad, String Telefono, String Correo,String Fecha_Ing,int id){
+       
+       boolean respuesta = false;
+      
+      
+      Connection cn = null;
+      
+      
+      cn = ConeccionSQL.getConeccion();
+      PreparedStatement preSentencia;
+      try{
+        preSentencia = cn.prepareStatement("UPDATE Cliente SET nombre=?,apellido=?, direccion=?,edad=?,telefono=?,correo=?,fecha_ing=? where id=?"); 
+        preSentencia.setInt(8,id);
+        preSentencia.setString(1, Nombre);
+        preSentencia.setString(2, Apellido);
+        preSentencia.setString(3, Direccion);
+        preSentencia.setString(5, Telefono);
+        preSentencia.setString(6, Correo);
+        preSentencia.setString(7,Fecha_Ing);
+        preSentencia.setInt(4, Edad);
+        
+        int res = preSentencia.executeUpdate();
+        
+        if(res==1){
+            respuesta  = true;
+        }else{
+            respuesta = false;
+        }
+    }catch(Exception e){
+        System.out.println(e);
+    }
+    return respuesta; 
+    
+    } 
+  
+      
   }
+
+    
+
      
+
+
+   
+        
+     
+          
+     
+
       
 
-    public boolean Modificar(int id, String text, String text0, String text1, String text2) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
+    
+    
+    
 
-    public boolean Actualizar(int id, String text, String text0, String text1, String text2, String text3, String text4, String text5) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-    
-    
-}
