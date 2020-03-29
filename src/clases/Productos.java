@@ -16,9 +16,11 @@ import java.sql.Statement;
  */
 public class Productos {
     
-     private int Edad;
-    private String Fecha;
-    private String Direccion;
+    private int Codigo;
+    private String Nombre_Produc;
+    private Float Precio;
+    public boolean Modificar;
+    public boolean Eliminar;
     
      //funcion para consultar
     public ResultSet consultar(){
@@ -46,8 +48,96 @@ public class Productos {
     
      //Funcion para insertar en la tabla
 
-    public boolean Guardar(String text, String text0, String text1, String text2) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean Guardar(int Codigo, String Nombre_Produc,float Precio,int Existencias){
+    boolean respuesta= false;
+    
+    Connection cn  = null;
+    
+    cn = ConeccionSQL.getConeccion();
+    
+    PreparedStatement preSentencia;
+    
+    try{
+        preSentencia = cn.prepareStatement("insert into Productos values (?,?,?,?)");
+        
+       
+        preSentencia.setInt(1, Codigo);
+        preSentencia.setString(2, Nombre_Produc);
+        preSentencia.setFloat(3, Precio);
+        preSentencia.setInt(4, Existencias); 
+        
+        int res = preSentencia.executeUpdate();
+        
+        if(res==1){
+            respuesta  = true;
+        }else{
+            respuesta = false;
+        }
+    }catch(Exception e){
+        System.out.println(e);
     }
+    return respuesta;
+   }
+
+    public boolean Modificar(int Codigo, String Nombre_Produc,float Precio,int Existencias){
+       
+       boolean respuesta = false;
+      
+      
+      Connection cn = null;
+      
+      
+      cn = ConeccionSQL.getConeccion();
+      PreparedStatement preSentencia;
+      try{
+        preSentencia = cn.prepareStatement("UPDATE Productos SET Nombre_Produc=?, Precio=?, Existencias=? where Codigo=?"); 
+        preSentencia.setInt(4,Codigo);
+        preSentencia.setString(1, Nombre_Produc);
+        preSentencia.setFloat(2,Precio);
+        preSentencia.setInt(3,Existencias);
+        
+        int res = preSentencia.executeUpdate();
+        
+        if(res==1){
+            respuesta  = true;
+        }else{
+            respuesta = false;
+        }
+    }catch(Exception e){
+        System.out.println(e);
+    }
+    return respuesta; 
+    
+    } 
+
+    public boolean Eliminar(int id){
+      boolean respuesta = false;
+      
+      Connection cn = null;
+      
+      cn = ConeccionSQL.getConeccion();
+      
+      PreparedStatement preSentencia;
+      
+      try{
+          preSentencia = cn.prepareStatement("DELETE FROM Productos WHERE Codigo=?");
+          preSentencia.setInt(1,id);
+          int res=preSentencia.executeUpdate();
+          if (res==1){
+              respuesta= true;
+              
+          }else{
+              respuesta= false;
+                      
+                      
+          }
+      }catch (Exception e) {
+          System.out.println(e);
+      }
+      return respuesta;
+  }  
+
+    
+
     
 }
