@@ -46,7 +46,7 @@ public class Clientes {
     
      //Funcion para insertar en la tabla
     
-    public boolean Guardar(String Nombre, String Apellido,String Direccion ,int Edad,String Telefono, String Correo,String Fecha_Ing){
+    public boolean Guardar(String Nombre, String Apellido,String Direccion ,int Edad,String Telefono, String Correo){
     boolean respuesta= false;
     
     Connection cn  = null;
@@ -64,7 +64,7 @@ public class Clientes {
         preSentencia.setString(3, Direccion); 
         preSentencia.setString(4, Telefono);
         preSentencia.setString(5, Correo);
-        preSentencia.setString(6, Fecha_Ing);
+    
         preSentencia.setInt(7, Edad);
         
         int res = preSentencia.executeUpdate();
@@ -141,6 +141,10 @@ public class Clientes {
     return respuesta; 
     
     } 
+
+    public boolean Guardar(String text, String text0, String text1, int parseInt, String text2, String text3, String text4) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
   
       
   }

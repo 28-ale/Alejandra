@@ -28,8 +28,8 @@ public class Inicio_Sesion extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnCerrar = new javax.swing.JButton();
+        btnInicio = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
@@ -40,14 +40,19 @@ public class Inicio_Sesion extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe Script", 3, 36)); // NOI18N
         jLabel1.setText("INICIO_SESION");
 
-        jButton1.setFont(new java.awt.Font("Segoe Script", 3, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 204));
-        jButton1.setText("CERRAR");
+        btnCerrar.setFont(new java.awt.Font("Segoe Script", 3, 18)); // NOI18N
+        btnCerrar.setForeground(new java.awt.Color(0, 0, 204));
+        btnCerrar.setText("CERRAR");
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Segoe Script", 3, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 204));
-        jButton2.setText("INICIAR");
-        jButton2.setActionCommand("Iniciar");
+        btnInicio.setFont(new java.awt.Font("Segoe Script", 3, 18)); // NOI18N
+        btnInicio.setForeground(new java.awt.Color(0, 0, 204));
+        btnInicio.setText("INICIAR");
+        btnInicio.setActionCommand("Iniciar");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel2.setText("  Usuario");
@@ -78,9 +83,9 @@ public class Inicio_Sesion extends javax.swing.JFrame {
                                 .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(71, 71, 71)
-                        .addComponent(jButton2)
+                        .addComponent(btnInicio)
                         .addGap(76, 76, 76)
-                        .addComponent(jButton1)))
+                        .addComponent(btnCerrar)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -100,13 +105,18 @@ public class Inicio_Sesion extends javax.swing.JFrame {
                         .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(73, 73, 73)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(btnInicio)
+                    .addComponent(btnCerrar))
                 .addGap(0, 31, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnCerrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,8 +154,8 @@ public class Inicio_Sesion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton btnInicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

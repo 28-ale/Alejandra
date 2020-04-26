@@ -79,10 +79,9 @@ public class Ventas {
     return respuesta;
    }
 
-    public boolean Guardar(String text, String text0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 
+   
     
     
 }
