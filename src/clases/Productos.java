@@ -48,7 +48,7 @@ public class Productos {
     
      //Funcion para insertar en la tabla
 
-    public boolean Guardar(int Codigo, String Nombre_Produc,float Precio,int Existencias){
+    public boolean Guardar(int Id, String Nombre,String Apellido,int Direccion, int Telefono, String Correo,int Edad ){
     boolean respuesta= false;
     
     Connection cn  = null;
@@ -56,15 +56,18 @@ public class Productos {
     cn = ConeccionSQL.getConeccion();
     
     PreparedStatement preSentencia;
-    
     try{
-        preSentencia = cn.prepareStatement("insert into Productos values (?,?,?,?)");
+        preSentencia = cn.prepareStatement("insert into Productos values (?,?,?,?,?,?,?)");
         
        
-        preSentencia.setInt(1, Codigo);
-        preSentencia.setString(2, Nombre_Produc);
-        preSentencia.setFloat(3, Precio);
-        preSentencia.setInt(4, Existencias); 
+        preSentencia.setInt(1, Id);
+        preSentencia.setString(2, Nombre);
+        preSentencia.setString(3, Apellido);
+        preSentencia.setInt(4,Direccion);
+        preSentencia.setInt(5,Telefono);
+        preSentencia.setString(6,Correo);
+        preSentencia.setInt(7,Edad);
+        
         
         int res = preSentencia.executeUpdate();
         
@@ -136,6 +139,10 @@ public class Productos {
       }
       return respuesta;
   }  
+
+    public boolean Guardar(int parseInt, String text, float parseFloat, int parseInt0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     
 

@@ -56,16 +56,20 @@ public class Clientes {
     PreparedStatement preSentencia;
     
     try{
-        preSentencia = cn.prepareStatement("insert into Cliente values (?,?,?,?,?,?,?)");
+        preSentencia = cn.prepareStatement("insert into Cliente values (?,?,?,?,?,?)");
         
        
         preSentencia.setString(1, Nombre);
         preSentencia.setString(2, Apellido);
-        preSentencia.setString(3, Direccion); 
+     
+        preSentencia.setString(3, Direccion);
+        
         preSentencia.setString(4, Telefono);
         preSentencia.setString(5, Correo);
+        
+        preSentencia.setInt(6, Edad);
     
-        preSentencia.setInt(7, Edad);
+       
         
         int res = preSentencia.executeUpdate();
         
@@ -107,7 +111,7 @@ public class Clientes {
       return respuesta;
   }  
 
-  public boolean Modificar(String Nombre, String Apellido,String Direccion,int Edad, String Telefono, String Correo,String Fecha_Ing,int id){
+  public boolean Modificar(String Nombre, String Apellido,int Edad,String Direccion, String Telefono, String Correo){
        
        boolean respuesta = false;
       
@@ -118,15 +122,16 @@ public class Clientes {
       cn = ConeccionSQL.getConeccion();
       PreparedStatement preSentencia;
       try{
-        preSentencia = cn.prepareStatement("UPDATE Cliente SET nombre=?,apellido=?, direccion=?,edad=?,telefono=?,correo=?,fecha_ing=? where id=?"); 
-        preSentencia.setInt(8,id);
+        preSentencia = cn.prepareStatement("Update Cliente Set nombre=?,apellido=?,edad=?, direccion=?,telefono=?,correo=?"); 
+           int Id = 0;
+        preSentencia.setInt(0, Id); 
         preSentencia.setString(1, Nombre);
         preSentencia.setString(2, Apellido);
-        preSentencia.setString(3, Direccion);
-        preSentencia.setString(5, Telefono);
-        preSentencia.setString(6, Correo);
-        preSentencia.setString(7,Fecha_Ing);
         preSentencia.setInt(4, Edad);
+        preSentencia.setString(3, Direccion);
+        preSentencia.setString(6, Telefono);
+        preSentencia.setString(5, Correo);
+      
         
         int res = preSentencia.executeUpdate();
         
@@ -143,6 +148,10 @@ public class Clientes {
     } 
 
     public boolean Guardar(String text, String text0, String text1, int parseInt, String text2, String text3, String text4) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean Modificar(String text, String text0, String text1, int parseInt, String text2, String text3, String text4) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
   
