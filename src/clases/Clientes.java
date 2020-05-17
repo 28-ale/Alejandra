@@ -19,6 +19,8 @@ public class Clientes {
     private int Edad;
     private String Fecha;
     private String Direccion;
+     public boolean Modificar;
+    public boolean Eliminar;
     
      //funcion para consultar
     public ResultSet consultar(){
@@ -111,8 +113,9 @@ public class Clientes {
       return respuesta;
   }  
 
-  public boolean Modificar(String Nombre, String Apellido,int Edad,String Direccion, String Telefono, String Correo){
+   public boolean Modificar(String Nombre, String Apellido,String Direccion ,String Telefono, String Correo,int Edad,int id){
        
+    
        boolean respuesta = false;
       
       
@@ -122,16 +125,16 @@ public class Clientes {
       cn = ConeccionSQL.getConeccion();
       PreparedStatement preSentencia;
       try{
-        preSentencia = cn.prepareStatement("Update Cliente Set nombre=?,apellido=?,edad=?, direccion=?,telefono=?,correo=?"); 
-           int Id = 0;
-        preSentencia.setInt(0, Id); 
+        preSentencia = cn.prepareStatement("UPDATE Cliente SET nombre=?, apellido=?, direccion=?,edad=?,telefono=?,correo=? WHERE id=?"); 
+        
         preSentencia.setString(1, Nombre);
-        preSentencia.setString(2, Apellido);
-        preSentencia.setInt(4, Edad);
-        preSentencia.setString(3, Direccion);
-        preSentencia.setString(6, Telefono);
-        preSentencia.setString(5, Correo);
-      
+        preSentencia.setString(2,Apellido);
+        preSentencia.setString(3,Direccion);
+        preSentencia.setInt(4,Edad);
+        preSentencia.setString(5,Telefono);
+        preSentencia.setString(6,Correo);
+        preSentencia.setInt(7,id);
+        
         
         int res = preSentencia.executeUpdate();
         
@@ -147,16 +150,17 @@ public class Clientes {
     
     } 
 
-    public boolean Guardar(String text, String text0, String text1, int parseInt, String text2, String text3, String text4) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
-    public boolean Modificar(String text, String text0, String text1, int parseInt, String text2, String text3, String text4) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
+    
+   
+
+
+    
   
       
-  }
+}
 
     
 
