@@ -5,7 +5,8 @@
  */
 package Interfaz;
 
-import clases.Productos;
+import clases.Clientes;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -17,8 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Alumno L2 Maq-14
  */
 public class Clientes2 extends javax.swing.JInternalFrame {
-      private int Codigo;
-    private Object tbTabla;
+     
 
     /**
      * Creates new form Clientes2
@@ -28,7 +28,7 @@ public class Clientes2 extends javax.swing.JInternalFrame {
            CargarTabla();
     }
     
-     Productos objUser = new Productos();
+     Clientes objUser = new Clientes();
     int id;
     String Nombre;
 
@@ -41,14 +41,36 @@ public class Clientes2 extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        mnEnviar = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         Buscar = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbEscritorio = new javax.swing.JTable();
+        tbConsultar = new javax.swing.JTable();
+
+        jPopupMenu1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jPopupMenu1AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
+        mnEnviar.setText("Enviar_Datos");
+        mnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnEnviarActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(mnEnviar);
+
+        setClosable(true);
 
         jLabel1.setText("  Buscar_Cliente");
 
-        tbEscritorio.setModel(new javax.swing.table.DefaultTableModel(
+        tbConsultar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -59,7 +81,8 @@ public class Clientes2 extends javax.swing.JInternalFrame {
                 "Nombre", "Apellido", "Telefono"
             }
         ));
-        jScrollPane1.setViewportView(tbEscritorio);
+        tbConsultar.setComponentPopupMenu(jPopupMenu1);
+        jScrollPane1.setViewportView(tbConsultar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,16 +114,48 @@ public class Clientes2 extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jPopupMenu1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jPopupMenu1AncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPopupMenu1AncestorAdded
+
+    private void mnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnEnviarActionPerformed
+        // TODO add your handling code here:
+      String nom="", apellido="";
+      int seleccion = tbConsultar.getSelectedRow();
+      if(seleccion== -1)
+      {
+         JOptionPane.showMessageDialog(null, "No ha seleccionado ningun dato");
+         
+      }
+      else
+      {
+          
+          nom = (String) tbConsultar.getValueAt(seleccion,1);
+          apellido = (String) tbConsultar.getValueAt(seleccion,2);
+          frmVentas.txtCliente.setText(nom+" "+apellido);
+                  
+                  
+                  
+          //frmVentas.txtcod.setText(cod);
+          //.txtCliente.setText(nom+" "+ape);  
+                  
+           this.dispose();
+      }
+        
+    }//GEN-LAST:event_mnEnviarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Buscar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbEscritorio;
+    private javax.swing.JMenuItem mnEnviar;
+    private javax.swing.JTable tbConsultar;
     // End of variables declaration//GEN-END:variables
 
     private void CargarTabla(){
-        DefaultTableModel modelo = (DefaultTableModel) tbEscritorio.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) tbConsultar.getModel();
         
         modelo.setRowCount(0);
         
@@ -116,11 +171,15 @@ public class Clientes2 extends javax.swing.JInternalFrame {
                 
                 
                 modelo.addRow(v);
-                tbEscritorio.setModel(modelo);
+                tbConsultar.setModel(modelo);
             }
         }catch (SQLException e){
             System.out.println(e);
         }
+    }
+
+    private int _1() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
  }
 

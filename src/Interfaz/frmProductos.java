@@ -225,18 +225,18 @@ public class frmProductos extends javax.swing.JInternalFrame {
           
         if(txtCodigo.getText().equals("")|| txtNombre.getText().equals("")||txtPrecio.getText().equals("")||txtExistencia.getText().equals("")){
             
-       
-            JOptionPane.showConfirmDialog( null,"Faltan datos x insertar","Error",JOptionPane.ERROR_MESSAGE);
-             }else{
+            }else{
+            //codigo para la insercion en la tabla
             
             boolean respuesta =true;
             respuesta = objUser.Guardar( Integer.parseInt(txtCodigo.getText()),txtNombre.getText(),Float.parseFloat(txtPrecio.getText()),Integer.parseInt(txtExistencia.getText()));
             if(respuesta){
-                JOptionPane.showMessageDialog(null, "Insersion exitosa" );
-                CargarTabla();
+                 CargarTabla();
+                 Limpiar();
             }else{
-              JOptionPane.showInputDialog(null, "Algo anda mal",JOptionPane.ERROR_MESSAGE);
+                
             }
+              
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -286,11 +286,8 @@ public class frmProductos extends javax.swing.JInternalFrame {
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
-         txtCodigo.setText("");
-        txtNombre.setText("");
-        txtPrecio.setText("");
-        txtExistencia.setText("");
-        
+   
+          Limpiar();
        
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
@@ -314,6 +311,13 @@ public class frmProductos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 
+    private void Limpiar(){
+        txtCodigo.setText("");
+        txtNombre.setText("");
+        txtPrecio.setText("");
+        txtExistencia.setText("");
+    }
+    
     private void CargarTabla() {
           DefaultTableModel modelo = (DefaultTableModel) tbConsulta.getModel();
         
@@ -338,4 +342,6 @@ public class frmProductos extends javax.swing.JInternalFrame {
         }
         
     }
+
+   
 }

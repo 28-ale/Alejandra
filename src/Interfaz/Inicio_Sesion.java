@@ -5,6 +5,7 @@
  */
 package Interfaz;
 
+
 /**
  *
  * @author Alumno L2 Maq-14
@@ -53,6 +54,11 @@ public class Inicio_Sesion extends javax.swing.JFrame {
         btnInicio.setForeground(new java.awt.Color(0, 0, 204));
         btnInicio.setText("INICIAR");
         btnInicio.setActionCommand("Iniciar");
+        btnInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInicioActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel2.setText("  Usuario");
@@ -117,6 +123,10 @@ public class Inicio_Sesion extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void btnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInicioActionPerformed
 
     /**
      * @param args the command line arguments

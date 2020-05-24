@@ -17,10 +17,11 @@ import java.sql.Statement;
 public class Productos {
     
     private int Codigo;
-    private String Nombre_Produc;
+    private String Nombre_Producto;
     private Float Precio;
     public boolean Modificar;
     public boolean Eliminar;
+    private int Existencia;
     
      //funcion para consultar
     public ResultSet consultar(){
@@ -48,7 +49,7 @@ public class Productos {
     
      //Funcion para insertar en la tabla
 
-    public boolean Guardar(int Id, String Nombre,String Apellido,int Direccion, int Telefono, String Correo,int Edad ){
+    public boolean Guardar(int Codigo,String Nombre_Producto, float Precio,int Existencia ){
     boolean respuesta= false;
     
     Connection cn  = null;
@@ -57,16 +58,14 @@ public class Productos {
     
     PreparedStatement preSentencia;
     try{
-        preSentencia = cn.prepareStatement("insert into Productos values (?,?,?,?,?,?,?)");
+        preSentencia = cn.prepareStatement("insert into Productos values (?,?,?,?)");
         
        
-        preSentencia.setInt(1, Id);
-        preSentencia.setString(2, Nombre);
-        preSentencia.setString(3, Apellido);
-        preSentencia.setInt(4,Direccion);
-        preSentencia.setInt(5,Telefono);
-        preSentencia.setString(6,Correo);
-        preSentencia.setInt(7,Edad);
+        preSentencia.setInt(1,Codigo);
+        preSentencia.setString(2,Nombre_Producto);
+        preSentencia.setFloat(3, Precio);
+        preSentencia.setInt(4,Existencia);
+     
         
         
         int res = preSentencia.executeUpdate();
@@ -140,10 +139,7 @@ public class Productos {
       return respuesta;
   }  
 
-    public boolean Guardar(int parseInt, String text, float parseFloat, int parseInt0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+  
     
 
     
