@@ -78,11 +78,14 @@ public class Clientes2 extends javax.swing.JInternalFrame {
                 {null, null, null}
             },
             new String [] {
-                "Nombre", "Apellido", "Telefono"
+                "Id_Cliente", "Nombre", "Apellido"
             }
         ));
         tbConsultar.setComponentPopupMenu(jPopupMenu1);
         jScrollPane1.setViewportView(tbConsultar);
+        if (tbConsultar.getColumnModel().getColumnCount() > 0) {
+            tbConsultar.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -167,7 +170,7 @@ public class Clientes2 extends javax.swing.JInternalFrame {
                 v.add(consultar.getInt(1));
                 v.add(consultar.getString(2));
                 v.add(consultar.getString(3));
-                v.add(consultar.getString(4));
+            
                 
                 
                 modelo.addRow(v);

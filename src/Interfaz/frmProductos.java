@@ -241,13 +241,13 @@ public class frmProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-          boolean respuesta;
-        respuesta = objUser.Modificar( Integer.parseInt(txtCodigo.getText()),txtNombre.getText(),Float.parseFloat(txtPrecio.getText()),Integer.parseInt(txtExistencia.getText()));
+        boolean respuesta;
+         respuesta = objUser.Modificar( Integer.parseInt(txtCodigo.getText()),txtNombre.getText(),Float.parseFloat(txtPrecio.getText()),Integer.parseInt(txtExistencia.getText()));
        if(respuesta){
            JOptionPane.showMessageDialog(null, "Actualizar exitosa( )");
            CargarTabla();
        }else{
-           JOptionPane.showMessageDialog(null, "Error");
+           JOptionPane.showMessageDialog(null, "Error, algo anda mal!!!(x_x)s");
        }
         
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -268,18 +268,17 @@ public class frmProductos extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        
-         int confirmacion;
+       int confirmacion;
         confirmacion = JOptionPane.showConfirmDialog(null,"Desea eliminar a "+Nombre+"?","Confirmar",JOptionPane.INFORMATION_MESSAGE);
         if(confirmacion == 0){
-            boolean respuesta = objUser.Eliminar(id);
+            boolean respuesta = objUser.Eliminar(Codigo);
             
             
             if(respuesta) {
-                JOptionPane.showConfirmDialog(null, "Dato eliminado");
+                JOptionPane.showConfirmDialog(null, " eliminado");
                 CargarTabla();
             }else{
-                JOptionPane.showConfirmDialog(null, " salio mal");
+                
             }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed

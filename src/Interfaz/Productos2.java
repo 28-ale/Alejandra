@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Alumno L2 Maq-14
  */
 public class Productos2 extends javax.swing.JInternalFrame {
-     private int Codigo;
+   
 
     /**
      * Creates new form Productos2
@@ -25,11 +25,12 @@ public class Productos2 extends javax.swing.JInternalFrame {
     public Productos2() {
         initComponents();
          CargarTabla();
+         
+         this.setLocation(50,50);;
     }
       
     Productos objUser = new Productos();
-    int id;
-    String Nombre;
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,10 +47,12 @@ public class Productos2 extends javax.swing.JInternalFrame {
         jTable2 = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
+        mnEnviar = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jLabel4 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tbTabla = new javax.swing.JTable();
+        tbConsultar = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -90,23 +93,32 @@ public class Productos2 extends javax.swing.JInternalFrame {
         ));
         jScrollPane3.setViewportView(jTable3);
 
+        jMenuItem1.setText("Enviar Datos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        mnEnviar.add(jMenuItem1);
+
         setClosable(true);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         jLabel4.setText("Buscar_Producto");
 
-        tbTabla.setModel(new javax.swing.table.DefaultTableModel(
+        tbConsultar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Nombre_Producto", "Cantidad", "Precio_Venta"
+                "Codigo", "Nombre_Producto", "Precio_Venta", "Existencias"
             }
         ));
-        jScrollPane4.setViewportView(tbTabla);
+        tbConsultar.setComponentPopupMenu(mnEnviar);
+        jScrollPane4.setViewportView(tbConsultar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,10 +129,10 @@ public class Productos2 extends javax.swing.JInternalFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(263, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 92, Short.MAX_VALUE))
+                .addComponent(jScrollPane4)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,16 +142,51 @@ public class Productos2 extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel modelo = (DefaultTableModel) frmVentas.tbConsulta.getModel();
+        int fila = tbConsultar.getSelectedRow();
+        int codigo = (int)tbConsultar.getValueAt(fila, 0);
+        String Producto = tbConsultar.getValueAt(fila, 1). toString();
+        float Precio = Float.parseFloat(tbConsultar.getValueAt(fila,2).toString());
+        int Existencia = (int) tbConsultar.getValueAt(fila,3);
+        int Cant = Integer.parseInt(JOptionPane.showInputDialog("ingrese la cantidad"));
+        
+        if(Cant <= Existencia){
+            try{
+                Vector v = new Vector();
+                v.add(codigo);
+                v.add(Producto);
+                v.add(Precio);
+                v.add(Cant);
+                v.add(Cant*Precio);
+                
+                modelo.addRow(v);
+                frmVentas.tbConsulta.setModel(modelo);
+                
+            }catch (Exception e){
+                System.out.println(e);
+            }
+            
+            
+        }else{
+            JOptionPane.showMessageDialog(this, "Ud. no cuenta con el stock apropiado");
+        }
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -147,12 +194,13 @@ public class Productos2 extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
-    private javax.swing.JTable tbTabla;
+    private javax.swing.JPopupMenu mnEnviar;
+    private javax.swing.JTable tbConsultar;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 
     private void CargarTabla() {
-        DefaultTableModel modelo = (DefaultTableModel) tbTabla.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) tbConsultar.getModel();
         
         modelo.setRowCount(0);
         
@@ -164,14 +212,16 @@ public class Productos2 extends javax.swing.JInternalFrame {
                 v.add(consultar.getInt(1));
                 v.add(consultar.getString(2));
                 v.add(consultar.getString(3));
-                v.add(consultar.getString(4));
+                v.add(consultar.getInt(4));
                 
                 
                 modelo.addRow(v);
-                tbTabla.setModel(modelo);
+                tbConsultar.setModel(modelo);
             }
         }catch (SQLException e){
             System.out.println(e);
         }
     }
+
+    
 }

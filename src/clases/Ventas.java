@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Date;
 
 
 /**
@@ -79,7 +80,37 @@ public class Ventas {
     return respuesta;
    }
 
-   
+    public boolean Comprar(String Fecha, String Cliente,Float Total){
+    boolean respuesta= false;
+    
+    Connection cn  = null;
+    
+    cn = ConeccionSQL.getConeccion();
+    
+    PreparedStatement preSentencia;
+    
+    try{
+        preSentencia = cn.prepareStatement("insert into Ventas values (?,?,?)");
+        
+       
+        preSentencia.setString(1,  Fecha);
+        preSentencia.setString(2, Cliente);
+        preSentencia.setFloat(3, Total); 
+        
+        int res = preSentencia.executeUpdate();
+        
+        if(res==1){
+            respuesta  = true;
+        }else{
+            respuesta = false;
+        }
+    }catch(Exception e){
+        System.out.println(e);
+    }
+    return respuesta;
+   }
+
+    
 
    
     
