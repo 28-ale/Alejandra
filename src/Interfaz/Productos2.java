@@ -170,7 +170,7 @@ public class Productos2 extends javax.swing.JInternalFrame {
                 
                 modelo.addRow(v);
                 frmVentas.tbConsulta.setModel(modelo);
-                
+                frmVentas.calcular();
             }catch (Exception e){
                 System.out.println(e);
             }

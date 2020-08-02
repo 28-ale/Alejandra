@@ -17,6 +17,8 @@ import java.util.Date;
  * @author Alumno L2 Maq-14
  */
 public class Ventas {
+    private static Object tbConsulta;
+    private static Object txtTotal1;
      private int Codigo;
     private String Nombre_Produc;
     private Float Precio;
@@ -109,6 +111,41 @@ public class Ventas {
     }
     return respuesta;
    }
+    
+    
+      public boolean Detalle_Venta(int Folio,int codigo, int cantidad){
+    boolean respuesta= false;
+    
+    Connection cn  = null;
+    
+    cn = ConeccionSQL.getConeccion();
+    
+    PreparedStatement preSentencia;
+    
+    try{
+        preSentencia = cn.prepareStatement("insert into Detalle_Venta values (?,?,?)");
+        
+       
+        preSentencia.setInt(2, codigo);
+        preSentencia.setInt(1, Folio);
+        preSentencia.setInt(3, cantidad);
+       
+        
+        int res = preSentencia.executeUpdate();
+        
+        if(res==1){
+            respuesta  = true;
+        }else{
+            respuesta = false;
+        }
+    }catch(Exception e){
+        System.out.println(e);
+    }
+    return respuesta;
+   }
+
+    
+    
 
     
 
