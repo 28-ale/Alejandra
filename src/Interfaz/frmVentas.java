@@ -30,6 +30,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
     public frmVentas() {
         
         initComponents();
+        CargarFolio();
          ImageIcon objImagen= new ImageIcon("src/imagenes/images.png");
         Icon icono = new ImageIcon(objImagen.getImage().getScaledInstance(80,80, SCALE_SMOOTH));
         btnProducto.setIcon(icono);
@@ -88,6 +89,12 @@ public class frmVentas extends javax.swing.JInternalFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel5.setText("Cliente");
+
+        txtFolio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFolioActionPerformed(evt);
+            }
+        });
 
         tbConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -237,13 +244,32 @@ public class frmVentas extends javax.swing.JInternalFrame {
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
         // TODO add your handling code here:
-        
+        guardar_v();
          for(int i=0;i<tbConsulta.getRowCount();i++)
         {
-          objUser.Detalle_Venta(1020, Integer.parseInt(tbConsulta.getValueAt(i, 0).toString()), Integer.parseInt(tbConsulta.getValueAt(i, 3).toString()));
+          objUser.Detalle_Venta( Integer.parseInt(txtFolio.getText()), Integer.parseInt(tbConsulta.getValueAt(i, 0).toString()), Integer.parseInt(tbConsulta.getValueAt(i, 3).toString()));
         }
     }//GEN-LAST:event_btnComprarActionPerformed
 
+    private void txtFolioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFolioActionPerformed
+        // TODO add your handling code here:
+     
+    }//GEN-LAST:event_txtFolioActionPerformed
+
+    public  void CargarFolio(){
+        //codigo img2
+        try{
+            ResultSet consultar = objUser.Folio();
+            while (consultar.next()){
+               
+                txtFolio.setText(Integer.toString(consultar.getInt(1)+1));
+                
+            }
+        }catch (SQLException e){
+            System.out.println(e);
+        }
+    }
+    
       private void guardar_v(){
         System.out.println("Prueba 1");
          if( txtFecha.getText().equals("")||txtCliente.getText().equals("")||txtTotal1.getText().equals("")){

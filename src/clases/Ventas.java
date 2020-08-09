@@ -112,8 +112,29 @@ public class Ventas {
     return respuesta;
    }
     
+    public ResultSet Folio (){
+        
+          Connection cn = null;
+      
+      cn = ConeccionSQL.getConeccion();
+      
+      Statement sentencia = null;
+      
+      ResultSet datos = null;
+      //intentamos la consulta
+      try{
+          //creamos la sentencia
+          sentencia = cn.createStatement();
+          datos = sentencia.executeQuery("select * from Ventas");
+          
+      }catch (Exception e){
+          System.out.println(e);
+      }
+      return datos;  
+    }
     
-      public boolean Detalle_Venta(int Folio,int codigo, int cantidad){
+    
+    public boolean Detalle_Venta(int Folio,int codigo, int cantidad){
     boolean respuesta= false;
     
     Connection cn  = null;
@@ -145,7 +166,25 @@ public class Ventas {
    }
 
     
-    
+    public ResultSet Folio1 (){
+             Connection cn = null;
+      
+      cn = ConeccionSQL.getConeccion();
+      
+      Statement sentencia = null;
+      
+      ResultSet datos = null;
+      //intentamos la consulta
+      try{
+          //creamos la sentencia
+          sentencia = cn.createStatement();
+          datos = sentencia.executeQuery("select MAX(Folio) as folio from Ventas");
+          
+      }catch (Exception e){
+          System.out.println(e);
+      }
+      return datos; 
+    }
 
     
 

@@ -5,19 +5,32 @@
  */
 package Interfaz;
 
+import static Interfaz.frmVentas.txtCliente;
+import static Interfaz.frmVentas.txtTotal1;
+import static Interfaz.principal.Escritorio;
+import clases.Clientes;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Alumno L2 Maq-14
  */
 public class Consulta_Ventas extends javax.swing.JInternalFrame {
+    
+ Clientes objUser = new Clientes();
+
 
     /**
      * Creates new form Consulta_Ventas
      */
     public Consulta_Ventas() {
         initComponents();
+        CargarTabla();
     }
-
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,13 +43,13 @@ public class Consulta_Ventas extends javax.swing.JInternalFrame {
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnCalcular = new javax.swing.JButton();
         txtFinal = new javax.swing.JTextField();
         txtInicio = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbConsulta = new javax.swing.JTable();
 
         jTextField1.setText("jTextField1");
 
@@ -53,7 +66,7 @@ public class Consulta_Ventas extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Calcular");
+        btnCalcular.setText("Calcular");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel1.setText("Fecha_Final");
@@ -61,7 +74,7 @@ public class Consulta_Ventas extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         jLabel2.setText("Fecha_Inicio");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -69,10 +82,10 @@ public class Consulta_Ventas extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Folio", "Fecha", "Cliente", "Total"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tbConsulta);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,7 +93,7 @@ public class Consulta_Ventas extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(182, 182, 182)
-                .addComponent(jButton1)
+                .addComponent(btnCalcular)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -108,7 +121,7 @@ public class Consulta_Ventas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
                 .addGap(32, 32, 32)
-                .addComponent(jButton1)
+                .addComponent(btnCalcular)
                 .addGap(56, 56, 56)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(60, Short.MAX_VALUE))
@@ -119,15 +132,45 @@ public class Consulta_Ventas extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnCalcular;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tbConsulta;
     private javax.swing.JTextField txtFinal;
     private javax.swing.JTextField txtInicio;
     // End of variables declaration//GEN-END:variables
+
+     private void CargarTabla() {
+   
+        DefaultTableModel modelo = (DefaultTableModel) tbConsulta.getModel();
+        
+        modelo.setRowCount(0);
+        
+        try{
+            ResultSet Consulta = objUser.Consulta();
+            
+            while(Consulta.next()){
+                Vector v =  new Vector();
+                v.add(Consulta.getInt(1));
+                v.add(Consulta.getString(2));
+                v.add(Consulta.getString(3));
+                v.add(Consulta.getString(4));
+              
+       
+            
+                
+                modelo.addRow(v);
+                tbConsulta.setModel(modelo);
+            }
+        }catch (SQLException e){
+            System.out.println(e);
+        }
+    
+    }
+    
 }
+
