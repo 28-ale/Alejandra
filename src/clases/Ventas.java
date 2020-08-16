@@ -15,7 +15,10 @@ import java.util.Date;
 /**
  *
  * @author Alumno L2 Maq-14
- */
+ */ 
+
+
+
 public class Ventas {
     private static Object tbConsulta;
     private static Object txtTotal1;
@@ -25,6 +28,7 @@ public class Ventas {
     public boolean Modificar;
     public boolean Eliminar;
     
+   
      //funcion para consultar
     public ResultSet consultar(){
         Connection cn = null;
@@ -43,6 +47,30 @@ public class Ventas {
             
             sentencia = cn.createStatement();
             datos = sentencia.executeQuery("SELECT * from venta");
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return datos;
+    }
+    
+    //funcion para consultar
+    public ResultSet con_fecha(String fecha1, String fecha2){
+        Connection cn = null;
+        
+        cn =  ConeccionSQL.getConeccion();
+        
+        Statement sentencia = null;
+        
+        ResultSet datos = null;
+        
+        
+        //intentamos la consulta
+        
+        try{
+           //creamos la sentencia
+            
+            sentencia = cn.createStatement();
+            datos = sentencia.executeQuery("SELECT * from Ventas WHERE Fecha BETWEEN '" +fecha1+"' AND '"+fecha2+ "'");
         }catch(Exception e){
             System.out.println(e);
         }
@@ -186,6 +214,20 @@ public class Ventas {
       return datos; 
     }
 
+    public ResultSet Tabla() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+   
+
+ 
+
+   
+
+   
+
+ 
+  
     
 
    

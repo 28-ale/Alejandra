@@ -21,6 +21,8 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Alumno L2 Maq-14
  */
+
+
 public class frmVentas extends javax.swing.JInternalFrame {
      private int Codigo;
 
@@ -89,6 +91,13 @@ public class frmVentas extends javax.swing.JInternalFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel5.setText("Cliente");
+
+        txtCliente.setText("Cliente 1");
+        txtCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtClienteActionPerformed(evt);
+            }
+        });
 
         txtFolio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -244,17 +253,26 @@ public class frmVentas extends javax.swing.JInternalFrame {
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
         // TODO add your handling code here:
-        guardar_v();
-         for(int i=0;i<tbConsulta.getRowCount();i++)
-        {
-          objUser.Detalle_Venta( Integer.parseInt(txtFolio.getText()), Integer.parseInt(tbConsulta.getValueAt(i, 0).toString()), Integer.parseInt(tbConsulta.getValueAt(i, 3).toString()));
+        if(guardar_v()){
+            for(int i=0;i<tbConsulta.getRowCount();i++)
+            {
+              objUser.Detalle_Venta( Integer.parseInt(txtFolio.getText()), Integer.parseInt(tbConsulta.getValueAt(i, 0).toString()), Integer.parseInt(tbConsulta.getValueAt(i, 3).toString()));
+            }
+            JOptionPane.showMessageDialog(null, "Venta Realizada :D");
+        }else{
+            JOptionPane.showMessageDialog(null, "ALGO SALIO MAL :(");
         }
+        this.setVisible(false);
     }//GEN-LAST:event_btnComprarActionPerformed
 
     private void txtFolioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFolioActionPerformed
         // TODO add your handling code here:
      
     }//GEN-LAST:event_txtFolioActionPerformed
+
+    private void txtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtClienteActionPerformed
 
     public  void CargarFolio(){
         //codigo img2
@@ -270,15 +288,15 @@ public class frmVentas extends javax.swing.JInternalFrame {
         }
     }
     
-      private void guardar_v(){
+      private boolean guardar_v(){
         System.out.println("Prueba 1");
+        boolean respuesta = false;
          if( txtFecha.getText().equals("")||txtCliente.getText().equals("")||txtTotal1.getText().equals("")){
             
             }else{
             //codigo para la insercion en la tabla
             
-            boolean respuesta =true;
-            respuesta = objUser.Comprar(txtFecha.getText(),txtCliente.getText(),Float.parseFloat(txtTotal1.getText()));
+          respuesta = objUser.Comprar(txtFecha.getText(),txtCliente.getText(),Float.parseFloat(txtTotal1.getText()));
             if(respuesta){
                  System.out.println("Compra Exitosa");
              
@@ -287,6 +305,7 @@ public class frmVentas extends javax.swing.JInternalFrame {
             }
               
         }
+         return respuesta;
     }
     
     public static void calcular(){

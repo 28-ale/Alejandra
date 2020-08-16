@@ -9,6 +9,7 @@ import static Interfaz.frmVentas.txtCliente;
 import static Interfaz.frmVentas.txtTotal1;
 import static Interfaz.principal.Escritorio;
 import clases.Clientes;
+import clases.Ventas;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -18,9 +19,10 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Alumno L2 Maq-14
  */
+
 public class Consulta_Ventas extends javax.swing.JInternalFrame {
     
- Clientes objUser = new Clientes();
+ Ventas objUser = new Ventas();
 
 
     /**
@@ -28,7 +30,7 @@ public class Consulta_Ventas extends javax.swing.JInternalFrame {
      */
     public Consulta_Ventas() {
         initComponents();
-        CargarTabla();
+        
     }
         
     /**
@@ -49,7 +51,7 @@ public class Consulta_Ventas extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbConsulta = new javax.swing.JTable();
+        tbTabla = new javax.swing.JTable();
 
         jTextField1.setText("jTextField1");
 
@@ -66,7 +68,16 @@ public class Consulta_Ventas extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        setClosable(true);
+        setToolTipText("");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         btnCalcular.setText("Calcular");
+        btnCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel1.setText("Fecha_Final");
@@ -74,7 +85,7 @@ public class Consulta_Ventas extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         jLabel2.setText("Fecha_Inicio");
 
-        tbConsulta.setModel(new javax.swing.table.DefaultTableModel(
+        tbTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -85,7 +96,7 @@ public class Consulta_Ventas extends javax.swing.JInternalFrame {
                 "Folio", "Fecha", "Cliente", "Total"
             }
         ));
-        jScrollPane2.setViewportView(tbConsulta);
+        jScrollPane2.setViewportView(tbTabla);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,6 +141,12 @@ public class Consulta_Ventas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
+        // TODO add your handling code here:
+        
+        CargarTabla();
+    }//GEN-LAST:event_btnCalcularActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCalcular;
@@ -139,32 +156,32 @@ public class Consulta_Ventas extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTable tbConsulta;
+    private javax.swing.JTable tbTabla;
     private javax.swing.JTextField txtFinal;
     private javax.swing.JTextField txtInicio;
     // End of variables declaration//GEN-END:variables
 
      private void CargarTabla() {
    
-        DefaultTableModel modelo = (DefaultTableModel) tbConsulta.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) tbTabla.getModel();
         
         modelo.setRowCount(0);
         
         try{
-            ResultSet Consulta = objUser.Consulta();
+            ResultSet Folio = objUser.con_fecha(txtInicio.getText(),txtFinal.getText());
             
-            while(Consulta.next()){
+            while(Folio.next()){
                 Vector v =  new Vector();
-                v.add(Consulta.getInt(1));
-                v.add(Consulta.getString(2));
-                v.add(Consulta.getString(3));
-                v.add(Consulta.getString(4));
+                v.add(Folio.getInt(1));
+                v.add(Folio.getString(2));
+                v.add(Folio.getString(3));
+                v.add(Folio.getString(4));
               
        
             
                 
                 modelo.addRow(v);
-                tbConsulta.setModel(modelo);
+                tbTabla.setModel(modelo);
             }
         }catch (SQLException e){
             System.out.println(e);
