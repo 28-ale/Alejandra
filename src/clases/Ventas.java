@@ -219,7 +219,39 @@ public class Ventas {
     }
 
    
+    public boolean Disminuir(int Codigo,int Cantidad){
+       
+    
+       boolean respuesta = false;
+      
+      
+      Connection cn = null;
+      
+      
+      cn = ConeccionSQL.getConeccion();
+      PreparedStatement preSentencia;
+      try{
+        preSentencia = cn.prepareStatement("UPDATE Productos SET Existencias=Existencias - ? WHERE Codigo=?"); 
+        
+        preSentencia.setInt(2, Codigo);
+        preSentencia.setInt(1,Cantidad);
+        
+        
+        int res = preSentencia.executeUpdate();
+        
+        if(res==1){
+            respuesta  = true;
+        }else{
+            respuesta = false;
+        }
+    }catch(Exception e){
+        System.out.println(e);
+    }
+    return respuesta; 
+    
+    } 
 
+   
  
 
    

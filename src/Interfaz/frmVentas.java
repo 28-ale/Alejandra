@@ -25,6 +25,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class frmVentas extends javax.swing.JInternalFrame {
      private int Codigo;
+    private Object txtCodigo;
+    private Object txtCantidad;
 
     /**
      * Creates new form frmVentas
@@ -255,7 +257,9 @@ public class frmVentas extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if(guardar_v()){
             for(int i=0;i<tbConsulta.getRowCount();i++)
+                
             {
+              objUser.Disminuir( Integer.parseInt(tbConsulta.getValueAt(i,0).toString()), Integer.parseInt(tbConsulta.getValueAt(i, 3).toString()));
               objUser.Detalle_Venta( Integer.parseInt(txtFolio.getText()), Integer.parseInt(tbConsulta.getValueAt(i, 0).toString()), Integer.parseInt(tbConsulta.getValueAt(i, 3).toString()));
             }
             JOptionPane.showMessageDialog(null, "Venta Realizada :D");
