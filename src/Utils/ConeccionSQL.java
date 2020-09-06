@@ -29,7 +29,7 @@ public class ConeccionSQL {
             
             
             //creamos la cadena de conexion
-            String url = "jdbc:sqlserver://DESKTOP-DN54B2K;databaseName=Tienda;user=ICO;password=12345;";
+            String url = "jdbc:sqlserver://DESKTOP-4TALAEV;databaseName=Tienda;";
             
             
             //conectamos
